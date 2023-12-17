@@ -73,7 +73,9 @@ def transfer(src, dst, creds, upstream=True,
 
     paths = []
     for path in srcs:
-        dst_path = path[len(src):]
+        # dst_path = path[len(src):]
+        # 修复单文件时，如果是压缩文件，无法解压的问题
+        dst_path = os.path.split(path)[1]
         if dst_path.startswith('/'):
             dst_path = dst_path[1:]
 
